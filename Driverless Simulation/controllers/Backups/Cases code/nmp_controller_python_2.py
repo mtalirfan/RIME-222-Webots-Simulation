@@ -16,17 +16,17 @@ from controller import (
 # create the Robot instance.
 robot = Robot()
 
-front_distance_threshold = 400  # 400,
-left_right_distance_threshold = 300  # 300,
-left_right_wall_threshold = 400  # 400,
-left_right_wall_crit_threshold = 700  # 700,
+front_distance_threshold = 450  # 450,
+left_right_distance_threshold = 400  # 400,
+left_right_wall_threshold = 450  # 450,
+left_right_wall_crit_threshold = 550  # 550,
 front_wall_threshold = 500  # 500,
 wall_collide_threshold = 950  # 950,
 
 max_velocity = 10
-turn_coefficient = 0.7
-soft_turn_coefficient = 0.8
-sharp_turn_coefficient = 0.5
+turn_coefficient = 0.65
+soft_turn_coefficient = 0.75
+sharp_turn_coefficient = 0.1
 
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())
@@ -146,8 +146,8 @@ while robot.step(timestep) != -1:
             > left_right_wall_crit_threshold
         ):  # too close to left wall
             robot_move("sharp right")
-            if frontDsVal < left_right_wall_threshold:
-                robot_move("forward")
+            # if frontDsVal < left_right_wall_threshold:
+            #     robot_move("forward")
         elif (
             min(leftDsVal, leftFrontLeftDsVal) > left_right_wall_threshold
         ):  # close to left wall
@@ -159,8 +159,8 @@ while robot.step(timestep) != -1:
             > left_right_wall_crit_threshold
         ):  # too close to right wall
             robot_move("sharp left")
-            if frontDsVal < left_right_wall_threshold:
-                robot_move("forward")
+            # if frontDsVal < left_right_wall_threshold:
+            #     robot_move("forward")
         elif (
             min(rightDsVal, rightFrontRightDsVal)
             > left_right_wall_threshold
@@ -173,16 +173,18 @@ while robot.step(timestep) != -1:
     elif (
         min(rightFrontRightDsVal, rightDsVal) < left_right_distance_threshold
         or leftFrontLeftDsVal >= left_right_distance_threshold
-        and abs(rightDsVal - leftDsVal) > left_right_distance_threshold
+        and abs(rightFrontRightDsVal - leftFrontLeftDsVal)
+        > left_right_distance_threshold
     ):  # there is way on right, or no way on left, and right way is more than left
-        robot_move("right")
+        robot_move("sharp right")
 
     elif (
         min(leftFrontLeftDsVal, leftDsVal) <= left_right_distance_threshold
         or rightFrontRightDsVal > left_right_distance_threshold
-        and abs(rightDsVal - leftDsVal) > left_right_distance_threshold
+        and abs(rightFrontRightDsVal - leftFrontLeftDsVal)
+        > left_right_distance_threshold
     ):  # there is way on left, or no way on right, and left way is more than right
-        robot_move("left")
+        robot_move("sharp left")
 
     # DEBUG Print the values
     print(f" \n ")
