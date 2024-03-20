@@ -1,17 +1,22 @@
-#VRML_SIM R2021a utf8
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
 WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.3555970108041349 0.9049390459149828 0.23374363966885706 5.102563261304765
-  position -2.7197974719630817 1.709529477814412 1.5221785134821677
+  orientation 0.24764799111930622 -0.4431853897342645 -0.8615434886415544 1.7962449557525686
+  position 0.05330155668328318 4.253379227820017 -0.7433230244582903
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 DEF Floor Floor {
-  rotation 0 1 0 0.7853996938995746
+  rotation 1 0 0 -1.5708003061004252
   size 4 4
   tileSize 0.4 0.4
 }
@@ -164,17 +169,19 @@ DEF Walls Group {
   ]
 }
 DEF ROBOT_RED Robot {
-  translation -0.926823 -0.0127381 -0.331878
-  rotation 0.014932602928053275 0.999868196058742 -0.006372431249535548 2.35631
+  translation -0.572739 0 -0.714217
+  rotation 0 1 0 2.3561996938995744
   children [
     Gyro {
     }
     Accelerometer {
     }
     Lidar {
+      rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0943951023931957
     }
-    DEF MAIN_BODY Transform {
+    DEF MAIN_BODY Pose {
       translation 0 0.0415 0
+      rotation -1 0 0 1.5707963267948966
       children [
         Shape {
           appearance PBRAppearance {
@@ -191,7 +198,7 @@ DEF ROBOT_RED Robot {
     }
     DEF LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 1912.9288321459119
+        position 716.4543820994643
         axis -1 0 0
         anchor 0 0.025 0
       }
@@ -201,11 +208,11 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.029999999999999055 0.025 0
-        rotation 1 0 0 2.1441712366824106
+        translation -0.02999999999999456 0.025 0
+        rotation 0.9999999999999999 0 0 4.813412919008605
         children [
-          DEF WHEEL Transform {
-            rotation 0 0 1 1.57
+          DEF WHEEL Pose {
+            rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
             children [
               Shape {
                 appearance PBRAppearance {
@@ -222,8 +229,8 @@ DEF ROBOT_RED Robot {
           }
         ]
         name "left wheel"
-        boundingObject DEF WHEEL Transform {
-          rotation 0 0 1 1.57
+        boundingObject DEF WHEEL Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -246,7 +253,7 @@ DEF ROBOT_RED Robot {
     }
     DEF RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 1176.257490414859
+        position -20.216961239977245
         axis -1 0 0
         anchor 0 0.025 0
       }
@@ -256,11 +263,11 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF RIGHT_WHEEL Solid {
-        translation 0.029999999999999992 0.025 0
-        rotation -1 0 0 2.9976732794558316
+        translation 0.029999999999999805 0.025 0
+        rotation -1 0 0 0.32842998874106355
         children [
-          DEF WHEEL Transform {
-            rotation 0 0 1 1.57
+          DEF WHEEL Pose {
+            rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
             children [
               Shape {
                 appearance PBRAppearance {
@@ -287,8 +294,8 @@ DEF ROBOT_RED Robot {
     DEF DS0 DistanceSensor {
       translation 0.045 0.063 0
       children [
-        DEF INFRARED Transform {
-          rotation 0 0 1 1.57
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -318,8 +325,8 @@ DEF ROBOT_RED Robot {
       translation 0.0225 0.063 -0.039
       rotation 0 1 0 1.0472003061004251
       children [
-        DEF INFRARED Transform {
-          rotation 0 0 1 1.57
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -345,12 +352,43 @@ DEF ROBOT_RED Robot {
       ]
       aperture 1
     }
+    DEF DS6 DistanceSensor {
+      translation 0 0.063 -0.044
+      rotation 0 1 0 1.5707903061004251
+      children [
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.975691 0.981481 0.0252992
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.004
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "ds6"
+      lookupTable [
+        0 1000 0
+        0.01 1000 0.01
+        0.1 500 0.01
+        0.9 50 0.01
+        1 10 0
+      ]
+      aperture 1
+    }
     DEF DS4 DistanceSensor {
       translation 0.039 0.063 -0.0233
       rotation 0 -1 0 -0.5236053071795865
       children [
-        DEF INFRARED Transform {
-          rotation 0 0 1 1.57
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -380,8 +418,8 @@ DEF ROBOT_RED Robot {
       translation -0.0225 0.063 -0.039
       rotation 0 1 0 2.094399693899575
       children [
-        DEF INFRARED Transform {
-          rotation 0 0 1 1.57
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -411,8 +449,8 @@ DEF ROBOT_RED Robot {
       translation -0.045 0.063 0
       rotation 0 1 0 3.141592653589793
       children [
-        DEF INFRARED Transform {
-          rotation 0 0 1 1.57
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -442,8 +480,8 @@ DEF ROBOT_RED Robot {
       translation -0.039 0.063 -0.022
       rotation 0 -1 0 -2.6179953071795863
       children [
-        DEF INFRARED Transform {
-          rotation 0 0 1 1.57
+        DEF INFRARED Pose {
+          rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
           children [
             Shape {
               appearance PBRAppearance {
@@ -468,32 +506,6 @@ DEF ROBOT_RED Robot {
         1 10 0
       ]
       aperture 1
-    }
-    DEF CAMERA Camera {
-      translation 0 0.045 -0.045
-      children [
-        Transform {
-          rotation 1 0 0 1.57
-          children [
-            Shape {
-              appearance PBRAppearance {
-                baseColor 1 0 0
-                roughness 1
-                metalness 0
-              }
-              geometry Cylinder {
-                height 0.01
-                radius 0.007
-              }
-            }
-          ]
-        }
-      ]
-      fieldOfView 1.047
-      width 1280
-      height 720
-      antiAliasing TRUE
-      noise 0.01
     }
     DEF LED LED {
       translation 0 0.08 0
@@ -535,8 +547,9 @@ DEF ROBOT_RED Robot {
     }
   ]
   name "ROBOT_RED"
-  boundingObject DEF MYBOT_BOUNDING Transform {
+  boundingObject DEF MYBOT_BOUNDING Pose {
     translation 0 0.0415 0
+    rotation -1 0 0 1.5707963267948966
     children [
       DEF BODY Cylinder {
         height 0.08
@@ -548,5 +561,5 @@ DEF ROBOT_RED Robot {
     density -1
     mass 0.5
   }
-  controller "NMP_Controller"
+  controller "nmp_controller_python_3"
 }
