@@ -9,4 +9,5 @@ build/release/NMP_Controller.o: NMP_Controller.cpp \
  E:\Webots/include/controller/cpp/webots/Camera.hpp \
  E:/Webots/include/controller/c/webots/camera_recognition_object.h \
  E:\Webots/include/controller/cpp/webots/Accelerometer.hpp \
- E:\Webots/include/controller/cpp/webots/Gyro.hpp
+ E:\Webots/include/controller/cpp/webots/Gyro.hpp \
+ E:\Webots/include/controller/cpp/webots/LED.hpp

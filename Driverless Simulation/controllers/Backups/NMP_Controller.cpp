@@ -14,7 +14,6 @@
 #include <webots/Camera.hpp>
 #include <webots/Accelerometer.hpp>
 #include <webots/Gyro.hpp>
-#include <webots/LED.hpp>
 #include <limits>
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
@@ -47,7 +46,6 @@ int main(int argc, char **argv) {
   Camera * cam = robot->getCamera("camera");
   Accelerometer * accelerometer = robot->getAccelerometer("accelerometer");
   Gyro *gyro = robot->getGyro("gyro");
-  LED *led = robot->getLED("led");
 
   // get the time step of the current world.
   int timeStep = (int)robot->getBasicTimeStep();
@@ -64,7 +62,6 @@ int main(int argc, char **argv) {
   accelerometer->enable(100);
   gyro->enable(100);
   cam->enable(50);
-  // led->enable(50);
   
   lmotor->setPosition(std::numeric_limits<double>::infinity());
   rmotor->setPosition(std::numeric_limits<double>::infinity());
@@ -76,9 +73,6 @@ int main(int argc, char **argv) {
     // Read the sensors:
     // Enter here functions to read sensor data, like:
     //  double val = ds->getValue();
-    if (frontLeftDs->getValue() != frontRightDs->getValue() ) {
-      led->set(0xff0000);
-    }
     lmotor->setVelocity(10);
     rmotor->setVelocity(10);
      // Process sensor data here.
