@@ -196,9 +196,6 @@ while robot.step(timestep) != -1:
     print(f"Left {leftDsVal} Right {rightDsVal}")
     print(f" \n ")
 
-    # led.set(0x0FFF00)
-    # print(led.get())
-
     pass
 
 # Enter here exit cleanup code.
