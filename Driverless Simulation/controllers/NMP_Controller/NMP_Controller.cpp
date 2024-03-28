@@ -31,9 +31,9 @@ float wall_collide_threshold = 950; // 950
 
 
 float max_velocity = 10;
-float turn_coefficient = 0.65;
+float turn_coefficient = 0.4;
 float soft_turn_coefficient = 0.75;
-float sharp_turn_coefficient = 0.1;
+float sharp_turn_coefficient = 0.3;
 
 // create the Robot instance.
 Robot *robot = new Robot();
@@ -133,50 +133,51 @@ rmotor->setVelocity(0);
 
 
   // - perform simulation steps until Webots is stopping the controller
-  while (robot->step(timeStep) != -1) {
-    // Read the sensors:
-    // Enter here functions to read sensor data, like:
-    //  double val = ds->getValue();
+    while (robot->step(timeStep) != -1) {
+        // Read the sensors:
+        // Enter here functions to read sensor data, like:
+        //  double val = ds->getValue();
 
-    float frontDsVal = frontDs->getValue();
-    float frontLeftDsVal = frontLeftDs->getValue();
-    float frontRightDsVal = frontRightDs->getValue();
-    float leftDsVal = leftDs->getValue();
-    float rightDsVal = rightDs->getValue();
-    float leftFrontLeftDsVal = leftFrontLeftDs->getValue();
-    float rightFrontRightDsVal = rightFrontRightDs->getValue();
+        float frontDsVal = frontDs->getValue();
+        float frontLeftDsVal = frontLeftDs->getValue();
+        float frontRightDsVal = frontRightDs->getValue();
+        float leftDsVal = leftDs->getValue();
+        float rightDsVal = rightDs->getValue();
+        float leftFrontLeftDsVal = leftFrontLeftDs->getValue();
+        float rightFrontRightDsVal = rightFrontRightDs->getValue();
 
     // Process sensor data here.
+
+    if (frontDsVal < front_distance_threshold) {
+    robot_move("forward");
+
+    if ( std::min(leftDsVal, std::min(frontLeftDsVal, leftFrontLeftDsVal)) > left_right_wall_crit_threshold ) {
+        robot_move("sharp right");
+        // if (frontDsVal < left_right_wall_threshold) { robot_move("forward"); }
+        }
+    else if ( std::min(leftDsVal, leftFrontLeftDsVal) > left_right_wall_threshold ) {
+        robot_move("soft right");
+        if (leftFrontLeftDsVal < left_right_wall_threshold) {robot_move("forward");}
+        };
+    if ( std::min(rightDsVal, std::min(frontRightDsVal, rightFrontRightDsVal)) > left_right_wall_crit_threshold) {
+        robot_move("sharp left");
+        // if (frontDsVal < left_right_wall_threshold) {robot_move("forward");}
+        }
+    else if ( std::min(rightDsVal, rightFrontRightDsVal) > left_right_wall_threshold ) {
+        robot_move("soft left");
+        if (rightFrontRightDsVal < left_right_wall_threshold) {robot_move("forward"); }
+        };
+    };
+    if (((std::min(rightFrontRightDsVal, rightDsVal) < left_right_distance_threshold)) )
+    {
+      robot_move("right");
+    }
+    else if (((std::min(leftFrontLeftDsVal, leftDsVal) < left_right_distance_threshold)))
+    {
+      robot_move("left");
+    }
     if (std::max(frontDsVal,std::max(leftDsVal,std::max(frontLeftDsVal,std::max(leftFrontLeftDsVal,std::max(rightDsVal,std::max(frontRightDsVal,rightFrontRightDsVal)))))) > wall_collide_threshold  ) {
       robot_move("back");
-    }
-    else if (frontDsVal < front_distance_threshold)
-    {
-      robot_move("forward");
-      if ( std::min(leftDsVal, std::min(frontLeftDsVal, leftFrontLeftDsVal)) > left_right_wall_crit_threshold ) {
-          robot_move("sharp right");
-          // if (frontDsVal < left_right_wall_threshold) { robot_move("forward"); }
-          }
-      else if ( std::min(leftDsVal, leftFrontLeftDsVal) > left_right_wall_threshold ) {
-          robot_move("soft right");
-          if (leftFrontLeftDsVal < left_right_wall_threshold) {robot_move("forward");}
-          };
-      if ( std::min(rightDsVal, std::min(frontRightDsVal, rightFrontRightDsVal)) > left_right_wall_crit_threshold) {
-          robot_move("sharp left");
-          // if (frontDsVal < left_right_wall_threshold) {robot_move("forward");}
-          }
-      else if ( std::min(rightDsVal, rightFrontRightDsVal) > left_right_wall_threshold ) {
-          robot_move("soft left");
-          if (rightFrontRightDsVal < left_right_wall_threshold) {robot_move("forward"); }
-          };
-    }
-    else if ( ( (std::min(rightFrontRightDsVal, rightDsVal) < left_right_distance_threshold) || (leftFrontLeftDsVal >= left_right_distance_threshold) ) && (abs(rightFrontRightDsVal - leftFrontLeftDsVal) > left_right_distance_threshold ))
-    {
-      robot_move("sharp right");
-    }
-    else if (((std::min(leftFrontLeftDsVal, leftDsVal) <= left_right_distance_threshold) || (rightFrontRightDsVal > left_right_distance_threshold)) && (abs(rightFrontRightDsVal - leftFrontLeftDsVal) > left_right_distance_threshold))
-    {
-      robot_move("sharp left");
     };
 
     // DEBUG Print the values

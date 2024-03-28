@@ -352,7 +352,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.029999999999995794 0.025 0
+        translation -0.029999999999995766 0.025 0
         rotation 0.9999999999999999 0 0 4.813412919008605
         children [
           DEF WHEEL Pose {
@@ -705,5 +705,5 @@ DEF ROBOT_RED Robot {
     density -1
     mass 0.5
   }
-  controller "nmp_controller_python_2"
+  controller "NMP_Controller"
 }
