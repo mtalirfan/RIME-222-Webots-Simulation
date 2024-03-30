@@ -19,18 +19,18 @@ from controller import (
 # create the Robot instance.
 robot = Robot()
 
-front_distance_threshold = 450  # 450, general front distance
-left_right_distance_threshold = 400  # 400, general left right distance
+front_distance_threshold = 500  # 400, general front distance
+left_right_distance_threshold = 350  # 350, general left right distance
 left_right_wall_threshold = (
     450  # 450, while moving forward, if robot gets close to wall do soft turn
 )
-left_right_wall_crit_threshold = 550  # 550, if robot gets closer to wall do sharp turn
+left_right_wall_crit_threshold = 700  # 600, if robot gets closer to wall do sharp turn
 wall_collide_threshold = 950  # 950, absolute limit, prevent wall collide and hence unexpected movement by moving back
 
 max_velocity = 10
-turn_coefficient = 0.65
+turn_coefficient = 0.5
 soft_turn_coefficient = 0.75
-sharp_turn_coefficient = 0.1
+sharp_turn_coefficient = 0.3
 
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())
@@ -56,6 +56,9 @@ def robot_move(direction="forward"):
         case "forward":
             lmotor.setVelocity(max_velocity)
             rmotor.setVelocity(max_velocity)
+        # case "descend":
+        #     lmotor.setVelocity(0.5 * max_velocity)
+        #     rmotor.setVelocity(0.5 * max_velocity)
         case "back":
             lmotor.setVelocity(-max_velocity)
             rmotor.setVelocity(-max_velocity)
@@ -181,12 +184,12 @@ while robot.step(timestep) != -1:
     if (
         max(
             frontDsVal,
-            leftDsVal,
+            # leftDsVal,
             frontLeftDsVal,
-            leftFrontLeftDsVal,
-            rightDsVal,
+            # leftFrontLeftDsVal,
+            # rightDsVal,
             frontRightDsVal,
-            rightFrontRightDsVal,
+            # rightFrontRightDsVal,
         )
         > wall_collide_threshold
     ):  # tooooooooo close to wall
@@ -197,6 +200,12 @@ while robot.step(timestep) != -1:
         if dir_debug:
             print("Forward")
         robot_move("forward")
+
+        # if gpsval[2] > 0.2:  # gps z value is on upper platform
+        #     if dir_debug:
+        #         print("Slow forward on upper platform")
+        #     robot_move("descend")
+
         if (
             min(leftDsVal, frontLeftDsVal, leftFrontLeftDsVal)
             > left_right_wall_crit_threshold
