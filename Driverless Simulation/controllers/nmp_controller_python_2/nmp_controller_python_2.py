@@ -4,13 +4,16 @@
 #  from controller import Robot, Motor, Device
 from controller import (
     Robot,
-    Lidar,
+    # Lidar,
     Motor,
     DistanceSensor,
-    Camera,
+    # Camera,
     Accelerometer,
     Gyro,
-    LED,
+    GPS,
+    Compass,
+    # LED,
+    Keyboard,
 )
 
 # create the Robot instance.
@@ -78,7 +81,35 @@ def robot_move(direction="forward"):
             rmotor.setVelocity(0)
 
 
-lidar = robot.getDevice("lidar")
+def key_press_check():
+    key = keyboard.getKey()
+    if key == ord("A"):
+        print(
+            f"Acceleration\nX: {acceleration[0]} Y: {acceleration[1]} Z: {acceleration[2]}"
+        )
+        print(f"\n ")
+    elif key == ord("C"):
+        print(f"Compass\nX: {compassval[0]} Y: {compassval[1]} Z: {compassval[2]}")
+        print(f"\n ")
+    elif key == ord("D"):
+        print(f"Distance Sensors\nFront: {frontDsVal}")
+        print(f"Front Left: {frontLeftDsVal} Front Right: {frontRightDsVal}")
+        print(
+            f"Left Front Left: {leftFrontLeftDsVal} Right Front Right: {rightFrontRightDsVal}"
+        )
+        print(f"Left: {leftDsVal} Right: {rightDsVal}")
+        print(f"\n ")
+    elif key == ord("G"):
+        print(f"GPS\nX: {gpsval[0]} Y: {gpsval[1]} Z: {gpsval[2]}")
+        print(f"\n ")
+    elif key == ord("X"):
+        print(f"Gyroscope\nX: {gyroscope[0]} Y: {gyroscope[1]} Z: {gyroscope[2]}")
+        print(f"\n ")
+    # elif key == Keyboard.CONTROL + ord("B"):
+    #     print("Ctrl+B is pressed")
+
+
+# lidar = robot.getDevice("lidar")
 frontDs = robot.getDevice("ds6")
 frontLeftDs = robot.getDevice("ds2")
 frontRightDs = robot.getDevice("ds1")
@@ -89,9 +120,12 @@ rightFrontRightDs = robot.getDevice("ds4")
 # cam = robot.getDevice("camera")
 accelerometer = robot.getDevice("accelerometer")
 gyro = robot.getDevice("gyro")
-led = robot.getDevice("led")
+gps = robot.getDevice("gps")
+compass = robot.getDevice("compass")
+# led = robot.getDevice("led")
+keyboard = Keyboard()
 
-lidar.enable(timestep)
+# lidar.enable(timestep)
 frontDs.enable(timestep)
 frontLeftDs.enable(timestep)
 frontRightDs.enable(timestep)
@@ -101,6 +135,9 @@ leftFrontLeftDs.enable(timestep)
 rightFrontRightDs.enable(timestep)
 accelerometer.enable(timestep)
 gyro.enable(timestep)
+gps.enable(timestep)
+compass.enable(timestep)
+keyboard.enable(timestep)
 # cam.enable(timestep)
 
 
@@ -118,7 +155,13 @@ while robot.step(timestep) != -1:
     rightDsVal = rightDs.getValue()
     leftFrontLeftDsVal = leftFrontLeftDs.getValue()
     rightFrontRightDsVal = rightFrontRightDs.getValue()
+    acceleration = accelerometer.getValues()
+    gyroscope = gyro.getValues()
+    gpsval = gps.getValues()
+    compassval = compass.getValues()
     # Process sensor data here.
+
+    key_press_check()
 
     # Enter here functions to send actuator commands, like:
     # motor.setPosition(10.0)
@@ -187,15 +230,19 @@ while robot.step(timestep) != -1:
         robot_move("sharp left")
 
     # DEBUG Print the values
-    print(f" \n ")
-    print(f"Front {frontDsVal}")
-    print(f"Front Left {frontLeftDsVal} Front Right {frontRightDsVal}")
-    print(
-        f"Left Front Left {leftFrontLeftDsVal} Right Front Right {rightFrontRightDsVal}"
-    )
-    print(f"Left {leftDsVal} Right {rightDsVal}")
-    print(f" \n ")
 
-    pass
+    # print(
+    #     f"Acceleration\nX: {acceleration[0]} Y: {acceleration[1]} Z: {acceleration[2]}"
+    # )
+    # print(f"Gyroscope\nX: {gyroscope[0]} Y: {gyroscope[1]} Z: {gyroscope[2]}")
+    # print(f"GPS\nX: {gpsval[0]} Y: {gpsval[1]} Z: {gpsval[2]}")
+    # print(f"Compass\nX: {compassval[0]} Y: {compassval[1]} Z: {compassval[2]}")
+    # print(f"Distance Sensors\nFront: {frontDsVal}")
+    # print(f"Front Left: {frontLeftDsVal} Front Right: {frontRightDsVal}")
+    # print(
+    #     f"Left Front Left: {leftFrontLeftDsVal} Right Front Right: {rightFrontRightDsVal}"
+    # )
+    # print(f"Left: {leftDsVal} Right: {rightDsVal}")
+    # print(f"\n ")
 
 # Enter here exit cleanup code.

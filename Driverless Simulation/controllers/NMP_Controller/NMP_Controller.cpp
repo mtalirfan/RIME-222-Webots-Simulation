@@ -19,6 +19,9 @@
 #include <webots/Gyro.hpp>
 #include <webots/LED.hpp>
 #include <limits>
+
+#include <webots/Keyboard.hpp>
+
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
 
@@ -56,7 +59,9 @@ DistanceSensor *rightFrontRightDs= robot->getDistanceSensor("ds4");
 // Camera * cam = robot->getCamera("camera");
 Accelerometer * accelerometer = robot->getAccelerometer("accelerometer");
 Gyro *gyro = robot->getGyro("gyro");
+Keyboard keyboard = Keyboard();
 // LED *led = robot->getLED("led");
+
 
 void robot_move(const char* direction) {
   // code to be executed
@@ -123,6 +128,8 @@ leftFrontLeftDs->enable(timeStep);
 rightFrontRightDs->enable(timeStep);
 accelerometer->enable(timeStep);
 gyro->enable(timeStep);
+
+keyboard.enable(timeStep);
 // cam->enable(50);
 // led->enable(50);
 
@@ -180,15 +187,31 @@ rmotor->setVelocity(0);
       robot_move("back");
     };
 
+
+    switch (keyboard.getKey()) {
+        case 'A': {
+            const double * acceleration = accelerometer->getValues();
+            printf("Acceleration\nX: %.3f Y: %.3f Z: %.3f \n", acceleration[0], acceleration[1], acceleration[2]);
+
+            break;
+        };
+
+
+
     // DEBUG Print the values
-    printf("\n \n");
-    printf("Front %f \n", frontDsVal);
-    printf("Front Left %f Front Right %f \n", frontLeftDsVal, frontRightDsVal);
-    printf(
-        "Left Front Left %f Right Front Right %f \n", leftFrontLeftDsVal, rightFrontRightDsVal
-    );
-    printf("Left %f Right %f \n\n", leftDsVal, rightDsVal);
-    printf("\n\n");
+
+    // printf("\n \n");
+
+    // const double * acceleration = accelerometer->getValues();
+    // printf("Acceleration\nX: %.3f Y: %.3f Z: %.3f \n", acceleration[0], acceleration[1], acceleration[2]);
+
+    // printf("Front %f \n", frontDsVal);
+    // printf("Front Left %f Front Right %f \n", frontLeftDsVal, frontRightDsVal);
+    // printf(
+    //     "Left Front Left %f Right Front Right %f \n", leftFrontLeftDsVal, rightFrontRightDsVal
+    // );
+    // printf("Left %f Right %f", leftDsVal, rightDsVal);
+    // printf("\n \n");
 
 
     // Enter here functions to send actuator commands, like:
@@ -200,3 +223,4 @@ rmotor->setVelocity(0);
   delete robot;
   return 0;
 }
+};

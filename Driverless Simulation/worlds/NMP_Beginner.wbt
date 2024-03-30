@@ -313,9 +313,13 @@ DEF Walls Group {
   ]
 }
 DEF ROBOT_RED Robot {
-  translation 0.247506 0 -0.247531
+  translation 0.268719 0 -0.226318
   rotation 0 1 0 2.3561996938995744
   children [
+    Compass {
+    }
+    GPS {
+    }
     Gyro {
     }
     Accelerometer {
@@ -352,7 +356,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.029999999999995766 0.025 0
+        translation -0.029999999999993622 0.025 0
         rotation 0.9999999999999999 0 0 4.813412919008605
         children [
           DEF WHEEL Pose {
@@ -705,5 +709,5 @@ DEF ROBOT_RED Robot {
     density -1
     mass 0.5
   }
-  controller "NMP_Controller"
+  controller "nmp_controller_python_2"
 }

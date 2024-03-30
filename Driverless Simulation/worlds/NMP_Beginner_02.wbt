@@ -9,8 +9,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.6790756338743502 0.6962469257502213 -0.23258654703467943 2.509827492174658
-  position -0.011512901639688041 9.69653902817222 2.0987277360675916
+  orientation 0.7597818651278658 -0.635419580461055 0.13774423468704064 3.9684772008228624
+  position -2.9952386058758096 8.849722077168106 3.5848731180854845
 }
 TexturedBackground {
 }
@@ -446,6 +446,10 @@ DEF ROBOT_RED Robot {
   translation 0.367713 0 -0.127324
   rotation 0 1 0 2.3561996938995744
   children [
+    Compass {
+    }
+    GPS {
+    }
     Gyro {
     }
     Accelerometer {
@@ -482,7 +486,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.029999999999994136 0.025 0
+        translation -0.029999999999993636 0.025 0
         rotation 0.9999999999999999 0 0 4.813412919008605
         children [
           DEF WHEEL Pose {
@@ -835,5 +839,5 @@ DEF ROBOT_RED Robot {
     density -1
     mass 0.5
   }
-  controller "NMP_Controller"
+  controller "nmp_controller_python_2"
 }
