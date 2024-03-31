@@ -1,4 +1,4 @@
-build/release/NMP_Controller.o: NMP_Controller.cpp \
+build/release/NMP_Sloped.o: NMP_Sloped.cpp \
  E:\Webots/include/controller/cpp/webots/Robot.hpp \
  E:\Webots/include/controller/cpp/webots/Motor.hpp \
  E:\Webots/include/controller/cpp/webots/Device.hpp \

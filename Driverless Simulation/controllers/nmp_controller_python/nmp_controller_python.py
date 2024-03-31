@@ -185,14 +185,14 @@ while robot.step(timestep) != -1:
         robot_move("left")
 
     # DEBUG Print the values
-    print(f" \n ")
-    print(f"Front {frontDsVal}")
-    print(f"Front Left {frontLeftDsVal} Front Right {frontRightDsVal}")
-    print(
-        f"Left Front Left {leftFrontLeftDsVal} Right Front Right {rightFrontRightDsVal}"
-    )
-    print(f"Left {leftDsVal} Right {rightDsVal}")
-    print(f" \n ")
+    # print(f" \n ")
+    # print(f"Front {frontDsVal}")
+    # print(f"Front Left {frontLeftDsVal} Front Right {frontRightDsVal}")
+    # print(
+    #     f"Left Front Left {leftFrontLeftDsVal} Right Front Right {rightFrontRightDsVal}"
+    # )
+    # print(f"Left {leftDsVal} Right {rightDsVal}")
+    # print(f" \n ")
 
     # led.set(0x0FFF00)
     # print(led.get())

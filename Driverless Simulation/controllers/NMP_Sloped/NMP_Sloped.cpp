@@ -27,14 +27,14 @@
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
 
-float front_distance_threshold = 450; // 450
-float left_right_distance_threshold = 400; // 400
+float front_distance_threshold = 500; // 500
+float left_right_distance_threshold = 350; // 350
 float left_right_wall_threshold = 450; // 450
-float left_right_wall_crit_threshold = 550; // 550
+float left_right_wall_crit_threshold = 700; // 700
 float wall_collide_threshold = 950; // 950
 
 float max_velocity = 10;
-float turn_coefficient = 0.4;
+float turn_coefficient = 0.5;
 float soft_turn_coefficient = 0.75;
 float sharp_turn_coefficient = 0.3;
 
@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
 
         // Process sensor data here.
 
-        if (std::max(frontDsVal,std::max(leftDsVal,std::max(frontLeftDsVal,std::max(leftFrontLeftDsVal,std::max(rightDsVal,std::max(frontRightDsVal,rightFrontRightDsVal)))))) > wall_collide_threshold  ) {
+        if ((std::max(frontDsVal,std::max(frontLeftDsVal,frontRightDsVal))) > wall_collide_threshold  ) {
         if (dir_debug == true) {
             printf("Back\n");
         };
@@ -196,11 +196,12 @@ int main(int argc, char **argv) {
             robot_move("soft right");
             if (leftFrontLeftDsVal < left_right_wall_threshold) {
                 if (dir_debug == true) {
-                    printf("Forward\n");
+                    printf("Soft Right Forward\n");
                 };
                 robot_move("forward");
                 }
             };
+
         if ( std::min(rightDsVal, std::min(frontRightDsVal, rightFrontRightDsVal)) > left_right_wall_crit_threshold) {
             if (dir_debug == true) {
                 printf("Sharp Left\n");
@@ -221,6 +222,7 @@ int main(int argc, char **argv) {
                 }
             };
         }
+
         else if (((std::min(rightFrontRightDsVal, rightDsVal) < left_right_distance_threshold)) )
         {
         if (dir_debug == true) {
