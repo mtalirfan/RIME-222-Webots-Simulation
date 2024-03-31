@@ -161,28 +161,28 @@ while robot.step(timestep) != -1:
     elif (
         rightDsVal < left_right_distance_threshold
         or leftDsVal >= left_right_distance_threshold
-        and abs(rightFrontRightDsVal - leftFrontLeftDsVal)
-        > left_right_distance_threshold
+        # and abs(rightFrontRightDsVal - leftFrontLeftDsVal)
+        # > left_right_distance_threshold
     ):  # there is way on right, or no way on left, and right way is more than left
         robot_move("right")
 
     elif (
         leftDsVal <= left_right_distance_threshold
         or rightDsVal > left_right_distance_threshold
-        and abs(rightFrontRightDsVal - leftFrontLeftDsVal)
-        > left_right_distance_threshold
+        # and abs(rightFrontRightDsVal - leftFrontLeftDsVal)
+        # > left_right_distance_threshold
     ):  # there is way on left, or no way on right, and left way is more than right
         robot_move("left")
 
     # DEBUG Print the values
-    print(f" \n ")
-    print(f"Front {frontDsVal}")
-    print(f"Front Left {frontLeftDsVal} Front Right {frontRightDsVal}")
-    print(
-        f"Left Front Left {leftFrontLeftDsVal} Right Front Right {rightFrontRightDsVal}"
-    )
-    print(f"Left {leftDsVal} Right {rightDsVal}")
-    print(f" \n ")
+    # print(f" \n ")
+    # print(f"Front {frontDsVal}")
+    # print(f"Front Left {frontLeftDsVal} Front Right {frontRightDsVal}")
+    # print(
+        # f"Left Front Left {leftFrontLeftDsVal} Right Front Right {rightFrontRightDsVal}"
+    # )
+    # print(f"Left {leftDsVal} Right {rightDsVal}")
+    # print(f" \n ")
 
     # led.set(0x0FFF00)
     # print(led.get())

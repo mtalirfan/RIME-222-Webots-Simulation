@@ -169,7 +169,7 @@ DEF Walls Group {
   ]
 }
 DEF ROBOT_RED Robot {
-  translation -0.572739 0 -0.714217
+  translation 0.141435 0 -4.5939e-05
   rotation 0 1 0 2.3561996938995744
   children [
     Gyro {
@@ -208,7 +208,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.02999999999999456 0.025 0
+        translation -0.02999999999999449 0.025 0
         rotation 0.9999999999999999 0 0 4.813412919008605
         children [
           DEF WHEEL Pose {

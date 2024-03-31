@@ -6,8 +6,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.3536130774166508 0.1580929740442128 -0.9219351403638878 2.3596722152978655
-  position 5.148151500489257 3.8046036550139832 5.563755716712835
+  orientation 0.4251281281949643 0.0952553662595742 -0.9001069324342528 2.743571021497595
+  position 4.730403285122604 0.9607399159096937 5.395787192299732
 }
 TexturedBackground {
 }
@@ -102,7 +102,7 @@ Solid {
   boundingObject USE Ground
 }
 Solid {
-  translation 0.760002 4.77516e-07 0
+  translation 0.760002 -0.909999 0
   rotation 0 0 1 1.5708
   children [
     DEF Ground Shape {
@@ -112,7 +112,7 @@ Solid {
         metalness 0
       }
       geometry Box {
-        size 2 2 0.02
+        size 10 10 0.02
       }
     }
   ]
@@ -570,7 +570,7 @@ Solid {
   boundingObject USE Wall
 }
 DEF ROBOT_RED Robot {
-  translation 0.21 0.68 0.040003
+  translation 1.25 0.68 0.040003
   rotation 1 0 0 1.5707996938995747
   children [
     Compass {
@@ -613,7 +613,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.029999999999992748 0.025 0
+        translation -0.029999999999992706 0.025 0
         rotation 0.9999999999999999 0 0 4.813412919008605
         children [
           DEF WHEEL Pose {
