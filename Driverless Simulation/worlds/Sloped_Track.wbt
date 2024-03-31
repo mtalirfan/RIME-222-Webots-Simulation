@@ -7,7 +7,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.4251281281949643 0.0952553662595742 -0.9001069324342528 2.743571021497595
-  position 4.730403285122604 0.9607399159096937 5.395787192299732
+  position 4.974785198997865 0.9604066619704318 5.973332318003606
 }
 TexturedBackground {
 }
@@ -444,7 +444,7 @@ Solid {
   boundingObject USE Wall
 }
 Solid {
-  translation 1.77 -2.62 0.32
+  translation 1.77 -2.62 0.36
   rotation 0 0 1 -1.5707953071795862
   children [
     DEF Wall Shape {
@@ -454,7 +454,7 @@ Solid {
         metalness 0
       }
       geometry Box {
-        size 0.5 0.02 0.1
+        size 0.5 0.02 0.2
       }
     }
   ]
@@ -462,7 +462,7 @@ Solid {
   boundingObject USE Wall
 }
 Solid {
-  translation -0.24 -2.62 0.32
+  translation -0.24 -2.62 0.35
   rotation 0 0 1 -1.5707953071795862
   children [
     DEF Wall Shape {
@@ -472,7 +472,7 @@ Solid {
         metalness 0
       }
       geometry Box {
-        size 0.5 0.02 0.1
+        size 0.5 0.02 0.2
       }
     }
   ]
@@ -570,7 +570,7 @@ Solid {
   boundingObject USE Wall
 }
 DEF ROBOT_RED Robot {
-  translation 1.25 0.68 0.040003
+  translation 0.05 0.08 0.0400011
   rotation 1 0 0 1.5707996938995747
   children [
     Compass {
@@ -585,7 +585,7 @@ DEF ROBOT_RED Robot {
       rotation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0943951023931957
     }
     DEF MAIN_BODY Pose {
-      translation 0 0.04585 0
+      translation 0 0.0457 0
       rotation -1 0 0 1.5707963267948966
       children [
         Shape {
@@ -613,8 +613,8 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.029999999999992706 0.025 0
-        rotation 0.9999999999999999 0 0 4.813412919008605
+        translation -0.029999999999992324 0.025 0
+        rotation 1 0 0 4.813412919008606
         children [
           DEF WHEEL Pose {
             rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
@@ -668,7 +668,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF RIGHT_WHEEL Solid {
-        translation 0.029999999999999805 0.025 0
+        translation 0.02999999999999984 0.025 0
         rotation -1 0 0 0.32842998874106355
         children [
           DEF WHEEL Pose {
@@ -953,7 +953,7 @@ DEF ROBOT_RED Robot {
   ]
   name "ROBOT_RED"
   boundingObject DEF MYBOT_BOUNDING Pose {
-    translation 0 0.04585 0
+    translation 0 0.0457 0
     rotation -1 0 0 1.5707963267948966
     children [
       DEF BODY Cylinder {
@@ -966,5 +966,5 @@ DEF ROBOT_RED Robot {
     density -1
     mass 0.5
   }
-  controller "sloped_track_python"
+  controller "NMP_Controller"
 }

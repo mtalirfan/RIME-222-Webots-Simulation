@@ -1,8 +1,8 @@
 // File:          NMP_Controller.cpp
-// Date:
-// Description:
-// Author:
-// Modifications:
+// Date:          31/March/2024 (Easter and Transgender Visibility Day !!!)
+// Description:   A Controller for a Webots Driverless Simulation Robot
+// Author:        Natalie
+// Modifications: Almost completely rewritten, built on sample code and ported from Python one
 
 // You may need to add webots include files such as
 // <webots/DistanceSensor.hpp>, <webots/Motor.hpp>, etc.
@@ -27,20 +27,21 @@
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
 
-float front_distance_threshold = 450; // 450
+float front_distance_threshold = 400; // 400
 float left_right_distance_threshold = 400; // 400
 float left_right_wall_threshold = 450; // 450
 float left_right_wall_crit_threshold = 550; // 550
 float wall_collide_threshold = 950; // 950
 
 float max_velocity = 10;
-float turn_coefficient = 0.4;
-float soft_turn_coefficient = 0.75;
-float sharp_turn_coefficient = 0.3;
+float slow_coefficient = 0.5;
+float turn_coefficient = 0.5;
+float soft_turn_coefficient = 0.7;
+float sharp_turn_coefficient = 0.1;
 
 bool val_debug = false;
 bool dir_debug = false;
-
+int collide_counter = 0;
 
 // create the Robot instance.
 Robot *robot = new Robot();
@@ -75,6 +76,10 @@ void robot_move(const char* direction) {
   if (strcmp(direction, "forward") == 0) {
       lmotor->setVelocity(max_velocity);
       rmotor->setVelocity(max_velocity);
+  }
+  else if (strcmp(direction, "slow forward") == 0) {
+      lmotor->setVelocity(slow_coefficient * max_velocity);
+      rmotor->setVelocity(slow_coefficient * max_velocity);
   }
   else if (strcmp(direction, "back") == 0)
   {
@@ -171,10 +176,14 @@ int main(int argc, char **argv) {
         // Process sensor data here.
 
         if (std::max(frontDsVal,std::max(leftDsVal,std::max(frontLeftDsVal,std::max(leftFrontLeftDsVal,std::max(rightDsVal,std::max(frontRightDsVal,rightFrontRightDsVal)))))) > wall_collide_threshold  ) {
+        robot_move("back");
+        collide_counter++;
         if (dir_debug == true) {
             printf("Back\n");
-        };
-        robot_move("back");
+        }
+        else {
+            printf("Collide Counter: %i \n", collide_counter);
+        }
         }
         else if (frontDsVal < front_distance_threshold) {
             if (dir_debug == true) {
@@ -182,44 +191,51 @@ int main(int argc, char **argv) {
             };
             robot_move("forward");
 
-        if ( std::min(leftDsVal, std::min(frontLeftDsVal, leftFrontLeftDsVal)) > left_right_wall_crit_threshold ) {
-            if (dir_debug == true) {
-                printf("Sharp Right\n");
-            };
-            robot_move("sharp right");
-            // if (frontDsVal < left_right_wall_threshold) { robot_move("forward"); }
-            }
-        else if ( std::min(leftDsVal, leftFrontLeftDsVal) > left_right_wall_threshold ) {
-            if (dir_debug == true) {
-                printf("Soft Right\n");
-            };
-            robot_move("soft right");
-            if (leftFrontLeftDsVal < left_right_wall_threshold) {
+            if (gpsval[2] > 0.2) {  // gps z value is on upper platform
                 if (dir_debug == true) {
-                    printf("Forward\n");
-                };
-                robot_move("forward");
+                    printf("Slow Forward\n");
                 }
+                robot_move("slow forward");
             };
-        if ( std::min(rightDsVal, std::min(frontRightDsVal, rightFrontRightDsVal)) > left_right_wall_crit_threshold) {
-            if (dir_debug == true) {
-                printf("Sharp Left\n");
-            };
-            robot_move("sharp left");
-            // if (frontDsVal < left_right_wall_threshold) {robot_move("forward");}
-            }
-        else if ( std::min(rightDsVal, rightFrontRightDsVal) > left_right_wall_threshold ) {
-            if (dir_debug == true) {
-                printf("Soft Left\n");
-            };
-            robot_move("soft left");
-            if (rightFrontRightDsVal < left_right_wall_threshold) {
+
+            if ( std::min(leftDsVal, std::min(frontLeftDsVal, leftFrontLeftDsVal)) > left_right_wall_crit_threshold ) {
                 if (dir_debug == true) {
-                    printf("Forward\n");
+                    printf("Sharp Right\n");
                 };
-                robot_move("forward");
+                robot_move("sharp right");
+                // if (frontDsVal < left_right_wall_threshold) { robot_move("forward"); }
                 }
-            };
+            else if ( std::min(leftDsVal, leftFrontLeftDsVal) > left_right_wall_threshold ) {
+                if (dir_debug == true) {
+                    printf("Soft Right\n");
+                };
+                robot_move("soft right");
+                if (leftFrontLeftDsVal < left_right_wall_threshold) {
+                    if (dir_debug == true) {
+                        printf("Forward\n");
+                    };
+                    robot_move("forward");
+                    }
+                };
+            if ( std::min(rightDsVal, std::min(frontRightDsVal, rightFrontRightDsVal)) > left_right_wall_crit_threshold) {
+                if (dir_debug == true) {
+                    printf("Sharp Left\n");
+                };
+                robot_move("sharp left");
+                // if (frontDsVal < left_right_wall_threshold) {robot_move("forward");}
+                }
+            else if ( std::min(rightDsVal, rightFrontRightDsVal) > left_right_wall_threshold ) {
+                if (dir_debug == true) {
+                    printf("Soft Left\n");
+                };
+                robot_move("soft left");
+                if (rightFrontRightDsVal < left_right_wall_threshold) {
+                    if (dir_debug == true) {
+                        printf("Forward\n");
+                    };
+                    robot_move("forward");
+                    }
+                };
         }
         else if (((std::min(rightFrontRightDsVal, rightDsVal) < left_right_distance_threshold)) )
         {
@@ -253,6 +269,10 @@ int main(int argc, char **argv) {
                 );
                 printf("Left: %f Right: %f", leftDsVal, rightDsVal);
                 printf("\n \n");
+                break;
+            }
+            case 'E': {
+                printf("Collide Counter: %i \n", collide_counter);
                 break;
             }
             case 'G': {

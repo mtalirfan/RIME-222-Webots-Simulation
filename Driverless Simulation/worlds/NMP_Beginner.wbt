@@ -5,26 +5,25 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 
 WorldInfo {
-  coordinateSystem "EUN"
 }
 Viewpoint {
-  orientation -0.7056511281766623 0.7067123977001405 -0.051127998591008236 3.2291042007094064
-  position 0.16095248559240805 7.056066014146973 -0.9166389304658185
+  orientation 0.5315897106254144 0.5602866693470838 -0.6352095935273172 1.9630300799786107
+  position -0.08007082919095732 1.6278471875738898 5.788870248683336
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 DEF Floor Floor {
-  rotation 1 0 0 -1.5708003061004252
+  translation 0 0 -0.07
   size 4 4
   tileSize 0.4 0.4
 }
 DEF Walls Group {
   children [
     DEF Wall Solid {
-      translation 0.9898 0.075 -0.4242
-      rotation 0 1 0 -0.7853996938995746
+      translation 0.982729 0.209349 4.26396e-07
+      rotation -0.8628556898685809 -0.357406871539237 -0.3574078715388776 -1.7177753071795863
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -41,8 +40,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.9898 0.075 0.4242
-      rotation 0 1 0 -0.7853996938995746
+      translation -0.9898 0.21642 -4.32902e-07
+      rotation 0.8628559982596194 -0.35740699927911007 0.35740699927911007 -1.7177753071795863
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -59,8 +58,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.9898 0.075 0.4242
-      rotation 0 1 0 0.7853996938995746
+      translation 0.982725 1.05787 -2.76289e-06
+      rotation 0.2810839910810645 0.6785989784677153 0.6785979784677472 2.59356
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -77,8 +76,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.9898 0.075 -0.4242
-      rotation 0 1 0 0.7853996938995746
+      translation -0.975658 1.0508 -1.47264e-06
+      rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -95,8 +94,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.2828 0.075 -0.5656
-      rotation 0 1 0 0.7853996938995746
+      translation 0.282801 1.20634 -1.71775e-06
+      rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -113,8 +112,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.2828 0.075 0.5656
-      rotation 0 1 0 0.7853996938995746
+      translation -0.2828 0.075 0
+      rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -131,8 +130,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.2828 0.075 -0.5656
-      rotation 0 1 0 -0.7853996938995746
+      translation -0.275729 1.1993 -3.4505e-06
+      rotation 0.8628559982596194 -0.35740699927911007 0.35740699927911007 -1.7177753071795863
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -149,8 +148,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.2828 0.075 0.5656
-      rotation 0 1 0 -0.7853996938995746
+      translation 0.2828 0.075 0
+      rotation 0.8628559982596194 -0.35740699927911007 0.35740699927911007 -1.7177753071795863
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -167,8 +166,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.707 0.075 0.1414
-      rotation 0 1 0 0.7853996938995746
+      translation 0.749426 0.527546 -6.60411e-07
+      rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -185,8 +184,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.707 0.075 -0.1414
-      rotation 0 1 0 0.7853996938995746
+      translation -0.706999 0.796246 -1.09504e-06
+      rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -203,8 +202,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.4242 0.075 -0.1414
-      rotation 0 1 0 0.7853996938995746
+      translation 0.4737 0.803317 -4.63915e-07
+      rotation 0.8628568705192763 0.357405946367489 0.357405946367489 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -221,8 +220,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.4242 0.075 0.1414
-      rotation 0 1 0 0.7853996938995746
+      translation -0.417128 0.520475 -6.7191e-07
+      rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -239,8 +238,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.707 0.075 -0.1414
-      rotation 0 1 0 2.3561996938995744
+      translation 0.756491 0.803317 1.13276e-07
+      rotation 0.8628583595540164 -0.357405148931114 -0.3574031489302807 1.71777
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -257,8 +256,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.707 0.075 0.1414
-      rotation 0 1 0 2.3561996938995744
+      translation -0.707003 0.513406 2.7086e-07
+      rotation 0.28108287934646486 0.6785987087146205 -0.6785987087146205 -2.593565307179586
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -275,8 +274,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation 0.424 0.075 0.1414
-      rotation 0 1 0 2.3561996938995744
+      translation 0.473494 0.520476 7.2177e-08
+      rotation 0.2810819583540569 0.6785988994567587 0.6785988994567587 2.59357
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -293,8 +292,8 @@ DEF Walls Group {
       boundingObject USE Wall
     }
     DEF Wall Solid {
-      translation -0.4242 0.075 -0.1414
-      rotation 0 1 0 2.3561996938995744
+      translation -0.424203 0.796246 4.45613e-07
+      rotation 0.28108287934646486 0.6785987087146205 -0.6785987087146205 -2.593565307179586
       children [
         DEF Wall Shape {
           appearance PBRAppearance {
@@ -313,8 +312,8 @@ DEF Walls Group {
   ]
 }
 DEF ROBOT_RED Robot {
-  translation 0.268719 0 -0.226318
-  rotation 0 1 0 2.3561996938995744
+  translation -0.941281 0.887463 -0.049996
+  rotation -0.7745972141161279 0.44721112361923393 0.44721512362033955 -1.823475307179586
   children [
     Compass {
     }
@@ -356,8 +355,8 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF LEFT_WHEEL Solid {
-        translation -0.02999999999999301 0.025 0
-        rotation 0.9999999999999999 0 0 4.813412919008605
+        translation -0.029999999999992692 0.025 0
+        rotation 1 0 0 4.8134129190086
         children [
           DEF WHEEL Pose {
             rotation -0.5776567755050862 -0.5771969549958951 0.5771969549958951 2.0939354039397986
@@ -411,7 +410,7 @@ DEF ROBOT_RED Robot {
         }
       ]
       endPoint DEF RIGHT_WHEEL Solid {
-        translation 0.029999999999999805 0.025 0
+        translation 0.02999999999999981 0.025 0
         rotation -1 0 0 0.32842998874106355
         children [
           DEF WHEEL Pose {
@@ -709,5 +708,5 @@ DEF ROBOT_RED Robot {
     density -1
     mass 0.5
   }
-  controller "NMP_Controller"
+  controller "nmp_controller_python"
 }

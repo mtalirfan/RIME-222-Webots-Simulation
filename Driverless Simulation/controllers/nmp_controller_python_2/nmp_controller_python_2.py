@@ -19,7 +19,7 @@ from controller import (
 # create the Robot instance.
 robot = Robot()
 
-front_distance_threshold = 450  # 450, general front distance
+front_distance_threshold = 400  # 400, general front distance
 left_right_distance_threshold = 400  # 400, general left right distance
 left_right_wall_threshold = (
     450  # 450, while moving forward, if robot gets close to wall do soft turn
@@ -28,8 +28,9 @@ left_right_wall_crit_threshold = 550  # 550, if robot gets closer to wall do sha
 wall_collide_threshold = 950  # 950, absolute limit, prevent wall collide and hence unexpected movement by moving back
 
 max_velocity = 10
-turn_coefficient = 0.65
-soft_turn_coefficient = 0.75
+slow_coefficient = 0.5
+turn_coefficient = 0.5
+soft_turn_coefficient = 0.7
 sharp_turn_coefficient = 0.1
 
 # get the time step of the current world.
@@ -56,6 +57,9 @@ def robot_move(direction="forward"):
         case "forward":
             lmotor.setVelocity(max_velocity)
             rmotor.setVelocity(max_velocity)
+        case "slow forward":
+            lmotor.setVelocity(slow_coefficient * max_velocity)
+            rmotor.setVelocity(slow_coefficient * max_velocity)
         case "back":
             lmotor.setVelocity(-max_velocity)
             rmotor.setVelocity(-max_velocity)
@@ -99,6 +103,8 @@ def key_press_check():
         )
         print(f"Left: {leftDsVal} Right: {rightDsVal}")
         print(f"\n ")
+    elif key == ord("E"):
+        print(f"Collide Counter: {collide_counter}")
     elif key == ord("G"):
         print(f"GPS\nX: {gpsval[0]} Y: {gpsval[1]} Z: {gpsval[2]}")
         print(f"\n ")
@@ -142,6 +148,7 @@ keyboard.enable(timestep)
 
 dir_debug = False
 val_debug = False
+collide_counter = 0
 
 # Main loop:
 # - perform simulation steps until Webots is stopping the controller
@@ -191,12 +198,20 @@ while robot.step(timestep) != -1:
         > wall_collide_threshold
     ):  # tooooooooo close to wall
         robot_move("back")
+        collide_counter = collide_counter + 1
+        print(f"Collide Counter: {collide_counter}")
         if dir_debug:
             print("Back")
     elif frontDsVal < front_distance_threshold:  # there is enough way forward
         if dir_debug:
             print("Forward")
         robot_move("forward")
+
+        if gpsval[2] > 0.2:  # gps z value is on upper platform
+            if dir_debug:
+                print("Slow Forward")
+            robot_move("slow forward")
+
         if (
             min(leftDsVal, frontLeftDsVal, leftFrontLeftDsVal)
             > left_right_wall_crit_threshold

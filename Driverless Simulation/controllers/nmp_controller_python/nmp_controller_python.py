@@ -103,6 +103,7 @@ accelerometer.enable(timestep)
 gyro.enable(timestep)
 # cam.enable(timestep)
 
+collide_counter = 0
 
 # Main loop:
 # - perform simulation steps until Webots is stopping the controller
@@ -135,6 +136,8 @@ while robot.step(timestep) != -1:
         > wall_collide_threshold
     ):  # tooooooooo close to wall
         robot_move("back")
+        collide_counter = collide_counter + 1
+        print(f"Collide Counter: {collide_counter}")
     elif (
         # abs(rightDsVal - leftDsVal) < left_right_distance_threshold and
         frontDsVal
